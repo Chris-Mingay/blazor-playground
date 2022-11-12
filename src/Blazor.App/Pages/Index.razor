@@ -1,0 +1,341 @@
+﻿@page "/"
+@using Blazor.Shared.Commands.Auth.Login
+@using Blazor.Shared.Commands.Auth.Register
+@using Blazor.App.Components
+@using Blazor.App.Components.Mock
+
+@inject IAuthenticationService _authenticationService;
+@inject IDataService _dataService;
+@inject JwtAuthenticationStateProvider _jwtAuthenticationStateProvider;
+
+<PageTitle>Index</PageTitle>
+
+<StandardPage>
+<HeaderContent>
+    HEADER
+</HeaderContent>
+<Content>
+
+<AuthorizeView Roles="Super">
+    <Authorized>
+        <h1>Only seen with the Super role</h1>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Duper">
+    <Authorized>
+        <h1>Only seen with the Duper role</h1>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Awesome">
+    <Authorized>
+        <h1>Only seen with the Awesome role</h1>
+    </Authorized>
+    <NotAuthorized>
+        You cannot see Awesome stuff :(
+    </NotAuthorized>
+</AuthorizeView>
+
+<AuthorizeView>
+    <Authorized>
+        <h1>Hello, @context.User.Identity.Name!</h1>
+        <p>You can only see this content if you're authorized.</p>
+    </Authorized>
+    <NotAuthorized>
+        <h1>Authentication Failure!</h1>
+        <p>You're not signed in.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+<div class="grid grid-cols-3 gap-2">
+    <Card>
+        <CardBody>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+            1<br/>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader>Header</CardHeader>
+        <CardBody>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid aut autem, consequuntur corporis dolore harum ipsam magni nesciunt quo, ratione ut vel veritatis voluptatibus voluptatum! Aliquam fugit magni quia!</p>
+        </CardBody>
+        <CardFooter CssClass="flex justify-between">
+            <Button CssClass="red link">Cancel</Button>
+            <Button CssClass="green">Submit</Button>
+        </CardFooter>
+    </Card>
+    <Card>
+        <CardBody>
+            3
+        </CardBody>
+        <CardFooter>Footer</CardFooter>
+    </Card>
+
+</div>
+
+<div>
+
+    <h1>Buttons</h1>
+    <h2>Default</h2>
+    @foreach (var size in SizeClasses)
+    {
+        <div class="mb-2 flex flex-wrap gap-1">
+            @foreach (var color in ColourClasses)
+            {
+                <Button CssClass="@($"{color} {size}")" OnClickCallback="() => Console.WriteLine(color)">
+                    @color
+                </Button>
+            }
+        </div>
+    }
+
+    <h2>Outlined</h2>
+    @foreach (var size in SizeClasses)
+    {
+        <div class="mb-2 flex flex-wrap gap-1">
+            @foreach (var color in ColourClasses)
+            {
+                <Button CssClass="@($"{color} {size} outlined")" OnClickCallback="() => Console.WriteLine(color)">
+                    @color
+                </Button>
+            }
+        </div>
+    }
+
+    <h2>Links</h2>
+    @foreach (var size in SizeClasses)
+    {
+        <div class="mb-2 flex flex-wrap gap-1">
+            @foreach (var color in ColourClasses)
+            {
+                <Button CssClass="@($"{color} {size} link")" OnClickCallback="() => Console.WriteLine(color)">
+                    @color
+                </Button>
+            }
+        </div>
+    }
+
+    <h2>Grouped</h2>
+    @foreach (var size in SizeClasses)
+    {
+        <div class="mb-2">
+            <ButtonGroup CssClass="@size">
+                @foreach (var color in ColourClasses)
+                {
+                    <Button CssClass="@color" OnClickCallback="() => Console.WriteLine(color)">
+                        @color
+                    </Button>
+                }
+            </ButtonGroup>
+        </div>
+    }
+
+    <Card>
+        <Content>
+            <MockParagraph IncludeHeader="true"/>
+
+            <Button>
+                <LoadingIndicator/>
+            </Button>
+        </Content>
+    </Card>
+
+    <div class="mb-2">
+        @foreach (var size in SizeClasses)
+        {
+            <Card CssClass="@size">
+                <CardHeader>
+                    @size
+                </CardHeader>
+                <CardBody>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur cumque cupiditate deleniti ducimus eos ipsum laborum libero non odit omnis quia sit tempora, tempore ullam velit veritatis voluptatem voluptatum?</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores assumenda, aut consectetur dignissimos distinctio dolor doloremque error laborum necessitatibus neque porro possimus quaerat quo reiciendis repellendus tempore totam ullam voluptatum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi asperiores aspernatur at consectetur cumque, dolores esse incidunt molestiae necessitatibus nihil omnis, quae quasi quia saepe sed, ut veniam voluptates!</p>
+                </CardBody>
+            </Card>
+        }
+    </div>
+
+    <div class="mb-2">
+        @foreach (var color in ColourClasses)
+        {
+            <Button CssClass="@color" OnClickCallback="() => Console.WriteLine(color)" Disabled="true">
+                @color
+            </Button>
+        }
+    </div>
+
+    <Badge CssClass="red">
+        <Heroicon Type="HeroiconType.Mini" Name="sparkles" class="h-3 w-3"/>
+        And some words
+        <Heroicon Type="HeroiconType.Mini" Name="sparkles" class="h-3 w-3"/>
+    </Badge>
+
+    <div class="mb-2">
+        @foreach (var color in ColourClasses)
+        {
+            <Card CssClass="@color">
+                <Content>
+                    <h1>@color</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur cumque cupiditate deleniti ducimus eos ipsum laborum libero non odit omnis quia sit tempora, tempore ullam velit veritatis voluptatem voluptatum?</p>
+                </Content>
+            </Card>
+        }
+    </div>
+
+    <div class="mb-2">
+        @foreach (var color in ColourClasses)
+        {
+            <Badge CssClass="@($"{color} pill")" Title="@color">@color</Badge>
+        }
+    </div>
+
+    <div class="mb-2">
+
+        @if (!Registered)
+        {
+            <button @onclick="Register" type="button">Register</button>
+        }
+        else if (!LoggedIn)
+        {
+            <button @onclick="Login" type="button">Login</button>
+        }
+
+        @if (LoggedIn)
+        {
+            <button @onclick="GetData" type="button">Get Data</button>
+            @if (Data is not null)
+            {
+                <ul>
+                    @foreach (var s in Data)
+                    {
+                        <li>@s</li>
+                    }
+                </ul>
+            }
+        }
+
+    </div>
+
+
+    <Grid Items="Things"
+          Context="thing">
+        <HeaderTemplate>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date</th>
+        </HeaderTemplate>
+        <RowTemplate>
+            <td>@thing.Id</td>
+            <td>@thing.Name</td>
+            <td>@thing.Description</td>
+            <td>@thing.SomeDate.ToShortDateString()</td>
+        </RowTemplate>
+    </Grid>
+
+</div>
+
+</Content>
+</StandardPage>
+
+
+@code {
+
+    private bool Registered = false;
+    private bool LoggedIn = false;
+    private List<string> Data = null;
+
+    private List<Something> Things = new List<Something>()
+    {
+        new Something() { Id = 1, Name = "Name 1", Description = "Desc Z", SomeDate = DateTime.Now.AddDays(0) },
+        new Something() { Id = 2, Name = "Name 2", Description = "Desc Y", SomeDate = DateTime.Now.AddDays(-1) },
+        new Something() { Id = 3, Name = "Name 3", Description = "Desc X", SomeDate = DateTime.Now.AddDays(-2) },
+        new Something() { Id = 4, Name = "Name 4", Description = "Desc V", SomeDate = DateTime.Now.AddDays(-3) },
+    };
+
+    private async Task Register()
+    {
+        var response = await _authenticationService.Register(new RegisterRequest()
+        {
+            DisplayName = "Chris",
+            EmailAddress = "chris@chrismingay.co.uk",
+            Password = "Testing123!"
+        });
+
+        Registered = true;
+    }
+
+    private async Task Login()
+    {
+        var response = await _authenticationService.Login(new LoginRequest()
+        {
+            EmailAddress = "chris@chrismingay.co.uk",
+            Password = "Testing123!"
+        });
+
+        LoggedIn = true;
+
+        _jwtAuthenticationStateProvider.Login(response.AccessToken);
+    }
+
+    private async Task GetData()
+    {
+        var response = await _dataService.Super();
+        Data = response;
+    }
+
+    private List<string> ColourClasses = new List<string>()
+    {
+        "default",
+        "green",
+        "red",
+        "blue",
+        "orange",
+        "black",
+        "white",
+        "gray",
+        "yellow"
+    };
+
+    private List<string> SizeClasses = new List<string>()
+    {
+        "xs",
+        "sm",
+        "standard-size",
+        "lg",
+        "xl"
+    };
+
+}
+
+<style>
+    h1,h2 {
+    font-weight: bold;
+    }
+    h1 {
+        font-size: 200%;
+        margin-bottom: 1rem;
+    }
+    h2 {
+        font-size: 125%;
+        margin-bottom: 1rem;
+    }
+</style>

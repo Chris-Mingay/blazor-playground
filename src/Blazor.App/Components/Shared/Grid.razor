@@ -1,0 +1,72 @@
+﻿@attribute [CascadingTypeParameter(nameof(TItem))]
+@typeparam TItem;
+
+<table class="w-full bg-white">
+    <thead>
+    <tr>
+        @HeaderTemplate
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in _items)
+    {
+        <tr>
+            @RowTemplate(item)
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code {
+
+    private IEnumerable<TItem> _items {
+        get
+        {
+            if (string.IsNullOrEmpty(_orderBy)) return Items;
+            var property = typeof(TItem).GetProperty(_orderBy);
+            
+            if(_descending) return Items.OrderByDescending(x => property.GetValue(x));
+            return Items.OrderBy(x => property.GetValue(x));
+            
+        }
+}
+
+    [Parameter]
+    public IList<TItem> Items { get; set; }
+
+    [Parameter]
+    public RenderFragment HeaderTemplate { get; set; }
+    
+    [Parameter]
+    public RenderFragment<TItem> RowTemplate { get; set; }
+    
+    
+    
+    
+    [Parameter]
+    public string OrderBy
+    {
+        get => _orderBy;
+        set
+        {
+            if (_orderBy == value)
+            {
+                _descending = !_descending;
+            }
+            else
+            {
+                _descending = false;
+            }
+            _orderBy = value;
+            StateHasChanged();
+        }
+    }
+
+    private string _orderBy { get; set; }
+    private bool _descending { get; set; }
+    
+}
+
+<style>
+    
+</style>

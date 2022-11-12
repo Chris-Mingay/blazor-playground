@@ -1,0 +1,65 @@
+﻿@if (HeaderContent is not null)
+{
+    <div class="page-header flex-none @HeaderStyleClasses @HeaderPaddingClasses @HeaderSizeClasses">
+        @HeaderContent
+    </div>
+}
+<div class="flex-1 flex">
+    @if (LeftSidebar is not null)
+    {
+        <div class="page-sidebar left flex-none @LeftSidebarStyleClasses @LeftSidebarPaddingClasses @LeftSidebarSizeClasses">
+            @LeftSidebar
+        </div>
+    }
+    <div class="page-content flex-1 @ContentStyleClasses @ContentPaddingClasses @ContentSizeClasses">
+        @Content
+    </div>
+    @if (RightSidebar is not null)
+    {
+        <div class="page-sidebar right @RightSidebarStyleClasses @RightSidebarPaddingClasses @(!string.IsNullOrEmpty(RightSidebarSizeClasses) ? RightSidebarSizeClasses : "hidden md:block md:w-48 lg:w-64 xl:w-84 2xl:w-96")">
+            @RightSidebar
+        </div>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public string HeaderStyleClasses { get; set; } = "border-b";
+    [Parameter]
+    public string HeaderPaddingClasses { get; set; } = "p-2";
+    [Parameter]
+    public string HeaderSizeClasses { get; set; } = "";
+
+
+    [Parameter]
+    public string ContentStyleClasses { get; set; } = "";
+    [Parameter]
+    public string ContentPaddingClasses { get; set; } = "p-2";
+    [Parameter]
+    public string ContentSizeClasses { get; set; } = "";
+
+    [Parameter]
+    public string LeftSidebarStyleClasses { get; set; } = "";
+    [Parameter]
+    public string LeftSidebarPaddingClasses { get; set; } = "p-2";
+    [Parameter]
+    public string LeftSidebarSizeClasses { get; set; } = "w-96";
+
+    [Parameter]
+    public string RightSidebarStyleClasses { get; set; } = "";
+    [Parameter]
+    public string RightSidebarPaddingClasses { get; set; } = "p-2";
+    [Parameter]
+    public string RightSidebarSizeClasses { get; set; } = "";
+
+
+    [Parameter]
+    public RenderFragment? HeaderContent { get; set; }
+    [Parameter]
+    public RenderFragment Content { get; set; }
+    [Parameter]
+    public RenderFragment? LeftSidebar { get; set; }
+    [Parameter]
+    public RenderFragment? RightSidebar { get; set; }
+}

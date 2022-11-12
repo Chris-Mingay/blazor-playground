@@ -1,0 +1,26 @@
+﻿@page "/Awesome"
+@using Microsoft.AspNetCore.Authorization
+@attribute  [Authorize(Roles = "Awesome")]
+
+<PageTitle>Awesome</PageTitle>
+
+<StandardPage>
+<HeaderContent>
+    Awesome
+</HeaderContent>
+<Content>
+
+    <Card>
+        <CardBody>
+            You only get to be here when you're Awesome
+        </CardBody>
+    </Card>
+    
+    
+</Content>
+</StandardPage>
+
+
+@code {
+
+}

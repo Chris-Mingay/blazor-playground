@@ -1,0 +1,65 @@
+﻿.card {
+    @apply bg-white rounded-xl shadow-lg overflow-hidden mb-2 flex flex-col;
+    
+    > .header {
+        @apply border-b border-black/10 p-3 flex-none;
+    }
+
+    > .footer {
+        @apply border-t border-black/10 p-3 flex-none;
+    }
+    
+    > .content {
+        @apply p-3 flex-1;
+    }
+
+    &.xl {
+        @apply text-xl;
+        > .content,.header,.footer {
+            @apply px-6 py-4;
+        }
+    }
+    &.lg {
+        @apply text-lg;
+        > .content,.header,.footer {
+            @apply px-4 py-3;
+        }
+    }
+    &.sm {
+        @apply text-sm;
+        > .content,.header,.footer {
+            @apply p-2;
+        }
+    }
+    &.xs {
+        @apply text-xs;
+        > .content,.header,.footer {
+            @apply p-2;
+        }
+    }
+    
+    &.green {
+        @apply text-white bg-green-500;
+    }
+    &.red {
+        @apply text-white bg-red-500;
+    }
+    &.blue {
+        @apply text-white bg-blue-500;
+    }
+    &.orange {
+        @apply text-white bg-orange-500;
+    }
+    &.white {
+        @apply text-gray-700 bg-white;
+    }
+    &.black {
+        @apply text-white bg-gray-900;
+    }
+    &.gray {
+        @apply text-white bg-gray-500;
+    }
+    &.yellow {
+        @apply text-black bg-yellow-400;
+    }
+}

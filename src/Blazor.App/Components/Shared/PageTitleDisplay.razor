@@ -1,0 +1,19 @@
+﻿@inject IJSRuntime jsRuntime
+
+@Title 
+
+@code {
+
+    public string Title = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetTitle();
+    }
+
+    public async Task GetTitle()
+    {
+        Title = await jsRuntime.InvokeAsync<string>("getTitle");
+        Console.WriteLine(Title);
+    }
+}

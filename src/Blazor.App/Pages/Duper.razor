@@ -1,0 +1,26 @@
+﻿@page "/Duper"
+@using Microsoft.AspNetCore.Authorization
+@attribute  [Authorize(Roles = "Duper")]
+
+<PageTitle>Duper</PageTitle>
+
+<StandardPage>
+<HeaderContent>
+    DUPER
+</HeaderContent>
+<Content>
+
+    <Card>
+        <CardBody>
+            You only get to be here when you're duper
+        </CardBody>
+    </Card>
+    
+    
+</Content>
+</StandardPage>
+
+
+@code {
+
+}

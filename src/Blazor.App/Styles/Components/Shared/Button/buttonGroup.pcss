@@ -1,0 +1,39 @@
+﻿.button-group {
+    @apply overflow-hidden outline outline-1 -outline-offset-1 outline-black/10 rounded inline-flex shadow;
+    
+    &.vertical {
+        @apply flex-col;
+        
+    }
+    
+    &.xs {
+        @apply rounded-xs;
+        > .button {
+            @apply px-1 py-0.5 text-xs;
+        }
+    }
+    &.sm {
+        @apply rounded-sm;
+        > .button {
+            @apply p-1 py-0.5 text-sm;
+        }
+    }
+    &.lg {
+        @apply rounded-lg;
+        > .button {
+            @apply px-3 py-1 text-lg;
+        }
+    }
+    &.xl {
+        @apply rounded-xl;
+        > .button {
+            @apply px-4 py-2 text-xl;
+        }
+    }
+    
+    
+    
+    > .button {
+        @apply rounded-none border-0;
+    }
+}

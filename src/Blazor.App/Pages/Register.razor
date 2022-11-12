@@ -1,0 +1,69 @@
+﻿@page "/Register"
+@using Blazor.Shared.Commands.Auth.Register
+@inject IAuthenticationService AuthenticationService
+@inject NavigationManager NavManager
+
+@code {
+
+    private RegisterRequest Command { get; } = new ();
+    private bool Loading { get; set; } = false;
+
+    private async Task OnInvalidSubmit()
+    {
+        Console.WriteLine("OnInvalidSubmit");
+    }
+
+    private async Task OnValidSubmit()
+    {
+        Loading = true;
+        var response = await AuthenticationService.Register(Command);
+        Loading = false;
+        if (response?.Success ?? false)
+        {
+            NavManager.NavigateTo("/Login");
+        }
+    }
+
+}
+
+<PageTitle>Register</PageTitle>
+
+<StandardPage>
+    <Content>
+        <Card>
+            <CardBody>
+                <EditForm Model="Command"
+                          OnValidSubmit="OnValidSubmit"
+                          OnInvalidSubmit="OnInvalidSubmit">
+                    <FluentValidationValidator/>
+                    <ExInputText @bind-Value="Command.DisplayName"
+                                 ValidationFor="@(() => Command.DisplayName)"
+                                 Label="Display name"
+                                 Required="true"/>
+                    <ExInputText @bind-Value="Command.EmailAddress"
+                                 ValidationFor="@(() => Command.EmailAddress)"
+                                 Label="Email Address"
+                                 Required="true"/>
+                    <ExInputPassword @bind-Value="Command.Password"
+                                     ValidationFor="@(() => Command.Password)"
+                                     Label="Password"
+                                     Required="true"/>
+                    <ExInputWrapper>
+                        <Button Type="submit" CssClass="button blue">
+                            @if(Loading){
+                                <LoadingIndicator/>
+                            } else {
+                                <span>Register</span>
+                            }
+                        </Button>
+                    </ExInputWrapper>
+
+                </EditForm>
+            </CardBody>
+        </Card>
+    </Content>
+</StandardPage>
+
+
+
+      

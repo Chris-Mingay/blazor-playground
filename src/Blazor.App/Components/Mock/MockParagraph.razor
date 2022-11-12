@@ -1,0 +1,29 @@
+﻿@code {
+
+    [Parameter] public int Lines { get; set; } = 4;
+    [Parameter] public string LineClass { get; set; } = "bg-gray-200";
+    [Parameter] public int LineHeight { get; set; } = 3;
+    [Parameter] public int LineSpacing { get; set; } = 3;
+    [Parameter] public string LastLineWidth { get; set; } = "2/4";
+    [Parameter] public bool IncludeHeader { get; set; }
+    
+}
+
+<div class="grid grid-cols-1 gap-@LineSpacing">
+    @if (IncludeHeader)
+    {
+        <div class="rounded-full @LineClass h-@(LineHeight * 2) w-1/4 bg-gray-300"></div>
+        <div></div>
+    }
+    @for (int i = 0; i < Lines; i++)
+    {
+        if (i < Lines - 1)
+        {
+            <div class="rounded-full @LineClass h-@LineHeight"></div>
+        }
+        else
+        {
+            <div class="rounded-full @LineClass h-@LineHeight w-@LastLineWidth"></div>
+        }
+    }
+</div>

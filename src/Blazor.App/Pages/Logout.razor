@@ -1,0 +1,17 @@
+﻿@page "/Logout"
+@inject NavigationManager NavManager
+@inject JwtAuthenticationStateProvider JwtAuthenticationStateProvider;
+
+@code {
+
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+		JwtAuthenticationStateProvider.Logout();
+		NavManager.NavigateTo("/Login");
+	}
+}
+
+
+
+      

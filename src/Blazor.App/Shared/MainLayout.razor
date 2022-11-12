@@ -1,0 +1,53 @@
+﻿@inherits LayoutComponentBase
+@code {
+    public bool SidebarOpen { get; set; } = false;
+
+    public void ToggleSidebar()
+    {
+        SidebarOpen = !SidebarOpen;
+    }
+
+    public void OnBackgroundClicked()
+    {
+        if (!SidebarOpen) return;
+        SidebarOpen = false;
+    }
+
+    private string _animationDuration = "duration-100";
+
+}
+
+<CascadingValue Value="@this">
+    <div class="flex min-h-screen bg-gray-200">
+
+      <div class="@(SidebarOpen ? "block opacity-50 ease-in" : "opacity-0 ease-out") fixed z-20 inset-0 bg-black transition-opacity @_animationDuration" 
+           style="@(SidebarOpen ? "" : "pointer-events: none")" 
+           @onclick="OnBackgroundClicked"></div>
+
+      <!-- Left Navigation bar -->
+      <div class="@(SidebarOpen ? "translate-x-0 ease-out" : "-translate-x-full ease-in") fixed z-30 inset-y-0 left-0 w-64 transition @_animationDuration transform bg-gray-900 overflow-y-auto">
+          <div class="flex items-center border-b border-gray-700 h-12">
+              
+              <button @onclick="ToggleSidebar" class="focus:outline-none button transparent flex-0">
+                  <Heroicon Name="@HeroiconName.ArrowLeft" Type="HeroiconType.Solid"  class="w-6 h-6 text-gray-400"></Heroicon>
+              </button>
+          </div>
+          <SideMenu/>
+      </div>
+      <!-- Main Body -->
+      <div class="flex-1 flex flex-col">
+          <div class="flex-0 flex items-center border-b sticky top-0 bg-white z-10 gap-1 h-12">
+              <button @onclick="ToggleSidebar" class="text-gray-500 focus:outline-none button transparent flex-0">
+                  <Heroicon Name="@HeroiconName.Bars3" Type="HeroiconType.Solid" class="w-6 h-6"></Heroicon>
+              </button>
+              <span class="flex-1 font-medium text-2xl py-2">
+                  <PageTitleDisplay/>    
+              </span>
+          </div>
+          <div class="flex-1 flex-col">
+              @Body
+          </div>
+      </div>
+
+    </div>  
+</CascadingValue>

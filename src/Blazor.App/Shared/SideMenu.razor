@@ -1,0 +1,48 @@
+﻿<nav>
+    
+    <a href="/" onclick="@OnLinkClicked">
+        <Heroicon Type="HeroiconType.Mini" Name="@HeroiconName.Home" class="heroicon"></Heroicon>
+        <span>
+            Home    
+        </span>
+    </a>
+    <a href="/Register" onclick="@OnLinkClicked">
+        <Heroicon Type="HeroiconType.Mini" Name="@HeroiconName.UserPlus" class="heroicon"></Heroicon>
+        <span>
+            Register
+        </span>
+    </a>
+    <a href="/Login" onclick="@OnLinkClicked">
+        <Heroicon Type="HeroiconType.Mini" Name="@HeroiconName.ArrowRightOnRectangle" class="heroicon"></Heroicon>
+        <span>Login</span>
+    </a>
+    <a href="/Refresh" onclick="@OnLinkClicked">
+        <Heroicon Type="HeroiconType.Mini" Name="@HeroiconName.ArrowPath" class="heroicon"></Heroicon>
+        <span>Refresh Session</span>
+    </a>
+    <a href="/ChangePassword" onclick="@OnLinkClicked">
+        <Heroicon Type="HeroiconType.Mini" Name="@HeroiconName.Key" class="heroicon"></Heroicon>
+        <span>Change Password</span>
+    </a>
+    
+    <AuthorizeView Roles="Duper">
+        <a href="/Duper" onclick="@OnLinkClicked">
+            <Heroicon Type="HeroiconType.Mini" Name="@HeroiconName.Sparkles" class="heroicon"></Heroicon>
+            <span>DUPER!</span>
+        </a>
+    </AuthorizeView>
+    
+</nav>
+
+@code {
+    
+    [CascadingParameter]
+    public MainLayout Layout { get; set; }
+
+    private void OnLinkClicked()
+    {
+        Console.WriteLine("OnLinkClicked");
+        Layout.SidebarOpen = false;
+    }
+
+}

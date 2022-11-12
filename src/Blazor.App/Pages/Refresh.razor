@@ -1,0 +1,55 @@
+﻿@page "/Refresh"
+@using Blazor.Shared.Commands.Auth.Login
+@inject IAuthenticationService AuthenticationService
+@inject NavigationManager NavManager
+@inject JwtAuthenticationStateProvider JwtAuthenticationStateProvider;
+
+@code {
+
+    private LoginRequest Command { get; } = new ();
+    private bool Loading { get; set; } = false;
+
+    private async Task OnInvalidSubmit()
+    {
+        Console.WriteLine("OnInvalidSubmit");
+    }
+
+    private async Task OnValidSubmit()
+    {
+        Loading = true;
+        var response = await AuthenticationService.Refresh();
+        Console.WriteLine(response?.AccessToken ?? "NULL");
+        Loading = false;
+    }
+
+}
+
+<PageTitle>Login</PageTitle>
+
+<StandardPage>
+    <Content>
+        <Card>
+            <CardBody>
+                <EditForm Model="Command"
+                          OnValidSubmit="OnValidSubmit"
+                          OnInvalidSubmit="OnInvalidSubmit">
+                    <FluentValidationValidator/>
+                    <ExInputWrapper>
+                        <Button Type="submit" CssClass="button blue">
+                            @if(Loading){
+                                <LoadingIndicator/>
+                            } else {
+                                <span>Refresh</span>
+                            }
+                        </Button>
+                    </ExInputWrapper>
+
+                </EditForm>
+            </CardBody>
+        </Card>
+    </Content>
+</StandardPage>
+
+
+
+      

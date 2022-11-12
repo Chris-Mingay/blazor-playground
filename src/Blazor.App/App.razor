@@ -1,0 +1,20 @@
+﻿@using Blazor.App.Components.Errors
+
+<CascadingAuthenticationState>
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <CustomAuthorizeRouteView RouteData="@routeData" 
+                                  DefaultLayout="@typeof(MainLayout)"
+                                  NotAuthorizedLayout="@typeof(LandingPageLayout)">
+            <NotAuthorized>
+                <Error50X/>
+            </NotAuthorized>
+        </CustomAuthorizeRouteView>
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(LandingPageLayout)">
+            <Error40X/>
+        </LayoutView>
+    </NotFound>
+</Router>
+</CascadingAuthenticationState>

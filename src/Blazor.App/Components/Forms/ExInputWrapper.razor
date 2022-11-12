@@ -1,0 +1,46 @@
+﻿<div class="flex flex-col md:flex-row mb-1">
+
+    <label class="py-2 mr-1 font-semibold
+			@_LabelWidthClass w-full mr-0 text-left pl-2
+			md:mr-1 md:text-right md:pl-0
+			">
+        @Label
+        @if (Required)
+        {
+            <span class="text-red-500 ml-1">*</span>
+        }
+    </label>
+    <div class="w-full md:flex-1">
+        @ChildContent
+    </div>
+
+</div>
+
+@code
+{
+
+    private string _LabelWidthClass
+    {
+        get
+        {
+            if (!string.IsNullOrEmpty(LabelWidthClass)) return LabelWidthClass;
+            if (!string.IsNullOrEmpty(CascadingLabelWidthClass)) return CascadingLabelWidthClass;
+            return "md:w-1/3";
+        }
+    }
+
+    [CascadingParameter(Name = "CascadingLabelWidthClass")]
+    public string CascadingLabelWidthClass { get; set; }
+
+    [Parameter]
+    public string LabelWidthClass { get; set; }
+
+    [Parameter]
+    public bool Required { get; set; }
+
+    [Parameter]
+    public string Label { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

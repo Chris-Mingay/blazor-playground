@@ -1,0 +1,114 @@
+﻿button.button,.button {
+    @apply text-base px-2 py-1 rounded inline-block inline-flex items-center gap-0.5 uppercase;
+    @apply bg-gray-100 text-gray-600 border border-gray-200;
+    @apply shadow;
+    @apply font-semibold;
+    @apply tracking-wide;
+
+    &.xl {
+        @apply px-4 py-2 text-xl rounded-xl;
+    }
+    &.lg {
+        @apply px-3 py-1 text-lg rounded-lg;
+    }
+    &.sm {
+        @apply p-1 py-0.5 text-sm rounded-sm;
+    }
+    
+    &.xs {
+        @apply px-1 py-0.5 text-xs rounded-xs;
+    }
+    
+    &.green {
+        @apply text-white bg-green-500 border-green-600;
+    }
+    &.red {
+        @apply text-white bg-red-500 border-red-500;
+    }
+    &.blue {
+        @apply text-white bg-blue-500 border-blue-500;
+    }
+    &.orange {
+        @apply text-white bg-orange-500 border-orange-500;
+    }
+    &.white {
+        @apply text-gray-700 bg-white border-gray-100;
+    }
+    &.black {
+        @apply text-white bg-gray-900 border-black;
+    }
+    &.gray {
+        @apply text-white bg-gray-500 border-gray-600;
+    }
+    &.yellow {
+        @apply text-black bg-yellow-400 border-yellow-500;
+    }
+    &.transparent {
+        @apply bg-transparent border-0 shadow-none;
+    }
+    
+    &.outlined {
+        @apply border;
+        &.green {
+            @apply text-green-500 border-green-600;
+        }
+        &.red {
+            @apply text-red-500 border-red-500;
+        }
+        &.blue {
+            @apply text-blue-500 border-blue-500;
+        }
+        &.orange {
+            @apply text-orange-500 border-orange-500;
+        }
+        &.white {
+            @apply text-white border-gray-100;
+        }
+        &.black {
+            @apply text-gray-900 border-black;
+        }
+        &.gray {
+            @apply text-gray-500 border-gray-600;
+        }
+        &.yellow {
+            @apply text-yellow-400 border-yellow-500;
+        }
+    }
+    &.link {
+        @apply border-0;
+    }
+    &.link,&.outlined {
+        @apply bg-transparent shadow-none;
+        &.green {
+            @apply text-green-500;
+        }
+        &.red {
+            @apply text-red-500;
+        }
+        &.blue {
+            @apply text-blue-500;
+        }
+        &.orange {
+            @apply text-orange-500;
+        }
+        &.white {
+            @apply text-white;
+        }
+        &.black {
+            @apply text-gray-900;
+        }
+        &.gray {
+            @apply text-gray-500;
+        }
+        &.yellow {
+            @apply text-yellow-400;
+        }
+    }
+    
+    
+}
+
+.button:disabled {
+    @apply opacity-50;
+}
+
